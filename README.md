@@ -1,41 +1,53 @@
+# IRSM Spectral Classification using Machine Learning and Deep Learning
+This repository contains code used for our work to predict idiopathic recurrent spontaneous miscarriages using Deep Learning (Specifically Variational Autoencoders, Artificial Neural networks and Convolutional Neural Networks (1D) as well as Classical Machine Learning models)
 
-torch_models.py
-The code contains two PyTorch models: VAE and ARN. Here is the documentation for each model:
-VAE
-The VAE class is a PyTorch module that implements a variational autoencoder. It takes in three arguments: input_size, hidden_size, and latent_size.
-Methods:
-init(self, input_size, hidden_size, latent_size): Initializes the linear layers of the encoder and decoder.
-encoder(self, x): Takes in an input tensor and returns the mean and log variance of the latent space.
-reparameterize(self, mu, logvar): Takes in the mean and log variance of the latent space and returns a sample from the corresponding normal distribution using the reparameterization trick.
-decoder(self, z): Takes in a sample from the latent space and returns the reconstructed output.
-forward(self, x): Takes in an input tensor, passes it through the encoder to obtain the mean and log variance of the latent space, samples from the corresponding normal distribution using the reparameterization trick, and passes the resulting sample through the decoder to obtain the reconstructed output, as well as returning the mean and log variance of the latent space.
-ARN
-The ARN class is a PyTorch module that implements an attention-based residual network. It takes in three arguments: input_size, hidden_size, and num_classes.
-Methods:
-init(self, input_size, hidden_size, num_classes): Initializes the linear layers of the attention mechanism, residual blocks, and output layer.
-forward(self, x): Takes in an input tensor, passes it through an attention mechanism, adds a residual connection, applies a ReLU activation function, adds another residual connection, applies another ReLU activation function, and passes it through an output layer to obtain class probabilities.
+### To run the code on your setup:
+1. Clone the repository to your local machine:
+ ```python
+ git clone https://github.com/DhruvaRajwade/IRSM_Spectral_Classification_DL.git
+ ```
 
-Loss_function
-Documentation for the provided loss function:
-The provided loss function is used for training a variational autoencoder (VAE) and consists of two terms: the binary cross-entropy (BCE) loss and the Kullback-Leibler divergence (KLD) loss. The BCE loss measures the difference between the reconstructed output and the input, while the KLD loss measures the difference between the distribution of the latent space and a standard normal distribution. The function takes in four arguments: recon_x, x, mu, and logvar.
-Arguments:
-recon_x: The reconstructed output from the decoder.
-x: The input tensor.
-mu: The mean of the latent space.
-logvar: The log variance of the latent space.
-Methods:
-nn.BCELoss(): Computes the binary cross-entropy loss between two tensors.
-torch.sum(): Computes the sum of all elements in a tensor.
-torch.pow(): Computes the element-wise power of a tensor.
-torch.exp(): Computes the element-wise exponential of a tensor.
-Return:
-The function returns the sum of BCE and KLD losses.
+2. Install the required dependencies:
+```python
+pip install -r requirements.txt
+```
+## Files
 
-Mean Squared Error (MSE) Loss:
-The MSE loss measures the difference between the reconstructed output and the input by computing the mean squared error between them. It can be implemented using nn.MSELoss().
+```
+|___Root
+|
+├── R_code/ # Requires the Chemospec package 
+│   ├── HCA.R # Sample R Code for Hierarchical Clustering using Agglomerate Euclidean distances
+│   └── LDA.R # Sample R Code for a Linear discriminant Analysis
+│
+├── dev/  # Some experimental code I implemented (Not included in the paper, but interesting nevertheless)
+│   ├── PINN.py 
+│   └── forward_forward_NIPS.py
+│
+├── sklearn/ # Classical Machine Learning code
+│   ├── cross_validation.py # Functions for Cross Validation and Visualization
+│   ├── grid_search.py      # Functions to conduct a GridSearch Hyperparameter sweep
+│   ├── model_selection.py  # Functions to help in initial model selection
+│   ├── pca_visualize.py    # Visualize PCA outputs using Loadings and scatter plots
+│   └── plot.py             # Helper script for grid_search.py
+│
+├── tensorflow/
+│   ├── cnn_bayesian_hyperparam_tuning.py # Bayesian hyperparameter tuning using keras-tuner
+│   ├── tf_cnn.py # 1 D CNN
+│   └── tf_eval.py # Evaluation and model inference
+│
+├── torch/
+│   ├── torch_eval.py # Evaluation and model inference
+│   ├── torch_models.py # Variational Autoencoder and Attention Residual ANN
+│   ├── torch_train.py  # Training script
+│   ├── vae_cross_validation.py # Cross-validate the pipeline
+│   └── vae_loss.py    # Loss functions {KL Divergence and BCE hybrid loss controlled by `Temperature` param, Negative Log Likelihood Loss and MSE loss implementations}
+│
+├── utils/
+│   └── data_preprocessing.py # Helper functions to convert the data from raw form to Numpy (for Sklearn and TF) or Torch tensors(For Pytorch)
+│
+├── README.md (What you're reading)
+└── requirements.txt (Generated using pipreqs!)
+```
 
-Binary Cross-Entropy (BCE) Loss:
-The BCE loss measures the difference between the reconstructed output and the input by computing the binary cross-entropy between them. It can be implemented using nn.BCELoss().
-
-Negative Log-Likelihood (NLL) Loss:
-The NLL loss measures how well a model predicts a probability distribution by computing the negative log-likelihood between the predicted distribution and the true distribution. It can be implemented using nn.NLLLoss().
+### Todo: Add Results and sample visualizations, add Example Notebooks 
