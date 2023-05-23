@@ -98,7 +98,7 @@ pip install -r requirements.txt
 ### (A) Support vector machine (SVM) (B) Random forest (RF) (C) Adaptive Boosting (AdaBoost) (D) Decision tree (DT) (E) Extreme Gradient Boosting (XGBoost) (F) Gradient boosting (GB) (=)
 ![](images/HP.jpg)
 
-### Results of best performing models (
+### Results of best performing models 
 
 | Model | Sensitivity | Specificity | Accuracy | F1 Score |
 |-------|-------------|-------------|----------|----------|
