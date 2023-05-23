@@ -49,9 +49,14 @@ pip install -r requirements.txt
 ├── README.md (What you're reading)
 └── requirements.txt (Generated using pipreqs!)
 ```
+## Overview Of Methodology
+
+<img src="images/overview.png" width="1000">
 
 ## Model Architectures:
+
 ### ANN
+
 <img src="images/ANN.jpg" width="600">
 
 ### Variational Autoencoder
@@ -85,11 +90,35 @@ pip install -r requirements.txt
 | Quadratic Discriminant Analysis  |   0.836     |  0.836   |
 | HistGradientBoostingClassifier   |    0.851    |  0.860   |
 
+### Pearson Correlation Analysis for the above metric data
+<img src="images/pearson.png" width="600">
+
+
 ### Hyperparameter Tuning Of Selected Models
-### (A) Support vector machine (SVM) (B) Random forest (RF) (C) Adaptive Boosting (AdaBoost) (D) Decision tree (DT) (E) Extreme Gradient Boosting (XGBoost) (F) Gradient boosting (GB)
+### (A) Support vector machine (SVM) (B) Random forest (RF) (C) Adaptive Boosting (AdaBoost) (D) Decision tree (DT) (E) Extreme Gradient Boosting (XGBoost) (F) Gradient boosting (GB) (=)
 ![](images/HP.jpg)
 
-### Results of best performing models
+### Results of best performing models (
 
+| Model | Sensitivity | Specificity | Accuracy | F1 Score |
+|-------|-------------|-------------|----------|----------|
+| SVM   |    81%      |    100%     |   90%    |   90%    |
+| XGBoost |   80%      |    90%      |   85%    |   84%    |
+| AdaBoost |   80%      |    90%      |   85%    |   84%    |
+| DT    |    80%      |    90%      |   85%    |   84%    |
+| RT    |    80%      |    90%      |   85%    |   84%    |
+| GB    |    80%      |    90%      |   85%    |   84%    |
+| CNN   |    90%      |    100%     |   94%    |   95%    |
+| ANN   |    88%      |    87%      |   88%    |   89%    |
 
-### Todo: Add Results and sample visualizations, add Example Notebooks , Add RayTune hyperparameter sweep code
+### Learning Curves For Best Performing Models 
+### ((A) Support vector machine (SVM) (B) Adaptive boosting (AdaBoost) (C) Extreme boosting (XGBoost) (D) Gradient boosting (E) Decision tree (F) Random forest)
+<img src="images/Learning curves FTIR600.jpg" width="600">
+
+### K Fold Cross Validation: Sensitivity Analysis of the value of K 
+### ((A) Support vector machine (SVM) (B) Adaptive boosting (AdaBoost) (C) Extreme boosting (XGBoost) (D) Gradient boosting (E) Decision tree (F) Random forest )
+<img src="images/k_sens.png" width="600">
+
+### Todo: 
+Add Example Notebooks
+Add RayTune hyperparameter sweep code
