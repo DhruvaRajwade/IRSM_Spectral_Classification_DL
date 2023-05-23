@@ -46,6 +46,9 @@ pip install -r requirements.txt
 ├── utils/
 │   └── data_preprocessing.py # Helper functions to convert the data from raw form to Numpy (for Sklearn and TF) or Torch tensors(For Pytorch)
 │
+│
+├── images # Visualizations for the README file
+|
 ├── README.md (What you're reading)
 └── requirements.txt (Generated using pipreqs!)
 ```
