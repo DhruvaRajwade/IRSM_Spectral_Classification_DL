@@ -65,7 +65,7 @@ pip install -r requirements.txt
 ### 1D CNN
 <img src="images/CNN.jpg" width="600">
 
-## Results
+## Results (For ATR-FTIR Spectroscopy Data)
 
 ### Initial Model runs (For Model Selection)
 
