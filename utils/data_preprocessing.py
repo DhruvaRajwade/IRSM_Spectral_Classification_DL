@@ -1,15 +1,15 @@
+from sklearn.preprocessing import StandardScaler
+from sklearn.impute import SimpleImputer
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import FunctionTransformer
 import numpy as np
 import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.pipeline import Pipeline
-from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler
 from scipy.signal import savgol_filter
-from sklearn.decomposition import PCA
-import matplotlib.pyplot as plt
 import torch
+
+
 def preprocess_data(file_path, scale=True, filter=True, split_ratio=[0.6, 0.2, 0.2], use_torch=False, one_hot=False, num_classes=2):
-    
     """
     Preprocesses data prior to doing ML modelling.
 
@@ -21,41 +21,47 @@ def preprocess_data(file_path, scale=True, filter=True, split_ratio=[0.6, 0.2, 0
     use_torch (bool, optional): Whether to convert the data to tensors. Defaults to False.
     one_hot (bool, optional): Whether to convert the labels to one-hot vectors. Defaults to False.
     num_classes (int, optional): Number of classes. Defaults to 2.
+
     Returns:
     tuple: A tuple containing the preprocessed training data, validation data, testing data, training labels, validation labels, and testing labels.
-
     """
     df = pd.read_csv(file_path)
-    labels = np.zeros(df.shape[1]-1)
+    labels = np.zeros(df.shape[0])  # Labels for control, ,repeat the same for the test CSV
     wavenums = df['Wavenumber']
-    data = df.iloc[0:, 1:].values
-    
+    data = df.iloc[:, 1:].values  # Update the column indexing
+
     # Apply scaling if requested
     if scale:
-        steps = [('imputer', SimpleImputer(strategy='mean')), ('scaler', StandardScaler()), ('passthrough', 'passthrough')]
+        steps = [('imputer', SimpleImputer(strategy='mean')), ('scaler', StandardScaler(
+        )), ('passthrough', FunctionTransformer(func=lambda x: x))]
     else:
-        steps = [('imputer', SimpleImputer(strategy='mean')), ('passthrough', 'passthrough')]
-    
+        steps = [('imputer', SimpleImputer(strategy='mean')),
+                 ('passthrough', FunctionTransformer(func=lambda x: x))]
+
     # Apply Savitzky-Golay filter if requested
     if filter:
-        steps.insert(1, ('filter', lambda x: savgol_filter(x, window_length=11, polyorder=2, axis=0)))
-    
+        steps.insert(1, ('filter', FunctionTransformer(
+            func=lambda x: savgol_filter(x, window_length=11, polyorder=2, axis=0))))
+
     # Create the pipeline and apply it to the data
     pipeline = Pipeline(steps)
     X_preprocessed = pipeline.fit_transform(data)
-    
+
     # Split the data into train, test, and validation sets
-    X_train_val, X_test, y_train_val, y_test = train_test_split(X_preprocessed, labels, test_size=split_ratio[2], random_state=42)
-    X_train, X_val, y_train, y_val = train_test_split(X_train_val, y_train_val, test_size=split_ratio[1]/(split_ratio[0]+split_ratio[1]), random_state=42)
-    
+    X_train_val, X_test, y_train_val, y_test = train_test_split(
+        X_preprocessed, labels, test_size=split_ratio[2], random_state=42)
+    X_train, X_val, y_train, y_val = train_test_split(
+        X_train_val, y_train_val, test_size=split_ratio[1]/(split_ratio[0]+split_ratio[1]), random_state=42)
+
     if use_torch is True:
         X_train = np.vstack(X_train).astype(float)
         X_test = np.vstack(X_test).astype(float)
-# Convert X_train and X_test to tensors
+
+        # Convert X_train and X_test to tensors
         X_train = torch.from_numpy(X_train).float()
         X_test = torch.from_numpy(X_test).float()
 
-# Convert y_train and y_test to tensors
+        # Convert y_train and y_test to tensors
         y_train = torch.from_numpy(y_train).long()
         y_test = torch.from_numpy(y_test).long()
         y_train = torch.nn.functional.one_hot(y_train, num_classes)
@@ -63,8 +69,9 @@ def preprocess_data(file_path, scale=True, filter=True, split_ratio=[0.6, 0.2, 0
         y_train = y_train.float()
         y_test = y_test.float()
 
-
+    print(f'X_train shape: {X_train.shape}', y_train.shape)
     return X_train, X_val, X_test, y_train, y_val, y_test
+
 
 
 def pca_transform(X_train, X_test, plot_scree=False):
