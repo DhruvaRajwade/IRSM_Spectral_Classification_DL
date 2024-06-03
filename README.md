@@ -126,6 +126,37 @@ We used FTIR-ATR Data (Endometrial tissue) for the below results. The data was g
 ### ((A) Support vector machine (SVM) (B) Adaptive boosting (AdaBoost) (C) Extreme boosting (XGBoost) (D) Gradient boosting (E) Decision tree (F) Random forest )
 <img src="images/k_sens.png" width="600">
 
+### Citation
+Please consider citing our work using the following bibtex entries,
+```bibtex
+@article{Sherpa2024,
+  title = {Attenuated Total Reflectance–Fourier Transform Infrared (ATR-FTIR) Spectroscopy Combined With Deep Learning for Classification of Idiopathic Recurrent Spontaneous Miscarriage (IRSM)},
+  ISSN = {1532-236X},
+  url = {http://dx.doi.org/10.1080/00032719.2024.2333960},
+  DOI = {10.1080/00032719.2024.2333960},
+  journal = {Analytical Letters},
+  publisher = {Informa UK Limited},
+  author = {Sherpa,  Dadoma and Rajwade,  Dhruva Abhijit and Mitra,  Imon and Biswas,  Souvik and Sharma,  Sunita and Chakraborty,  Pratip and Kalapahar,  Shovandeb and Chattopadhyay,  Ratna and Chaudhury,  Koel},
+  year = {2024},
+  month = apr,
+  pages = {1–17}
+}
+```
+```bibtex
+@inproceedings{Sherpa2023,
+  title = {Prediction of Idiopathic Recurrent Spontaneous Miscarriage using Machine Learning},
+  url = {http://dx.doi.org/10.1109/ICCECE51049.2023.10085363},
+  DOI = {10.1109/iccece51049.2023.10085363},
+  booktitle = {2023 International Conference on Computer,  Electrical &amp; Communication Engineering (ICCECE)},
+  publisher = {IEEE},
+  author = {Sherpa,  Dadoma and Abhijit,  Rajwade Dhruva and Mitra,  Imon and Dhar,  Dhruba and Sharma,  Sunita and Chakraborty,  Pratip and Chaudhury,  Koel},
+  year = {2023},
+  month = jan 
+}
+```
+
 ### Todo: 
 Add Example Notebooks
 Add RayTune hyperparameter sweep code
+
+
