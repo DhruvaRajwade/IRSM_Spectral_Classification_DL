@@ -1,5 +1,5 @@
 # IRSM Spectral Classification using Machine Learning and Deep Learning
-This repository contains code used for our work to predict idiopathic recurrent spontaneous miscarriages using Deep Learning (Specifically Variational Autoencoders, Artificial Neural networks and Convolutional Neural Networks (1D) as well as Classical Machine Learning models)
+This repository contains code used for our work  ([paper 1](https://ieeexplore.ieee.org/abstract/document/10085363) and [paper 2](https://www.tandfonline.com/doi/abs/10.1080/00032719.2024.2333960) ) to predict idiopathic recurrent spontaneous miscarriages using Deep Learning (Specifically Variational Autoencoders, Artificial Neural networks and Convolutional Neural Networks (1D) as well as Classical Machine Learning models)
 
 ### To run the code on your setup:
 1. Clone the repository to your local machine:
